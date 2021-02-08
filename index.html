@@ -1,0 +1,31 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="general_input" value="введите ваше имя">
+    <button id="general_button"   onclick='buttonFunc()'> Нажмите
+    </button>
+    <p id="general_p">Пусто</p>
+    <script>
+        
+        async function loadData(name) {
+            const res = await fetch(
+                "http://localhost:3000/hello"+"?name="+name
+            );
+            const json = await res.json();
+            return json
+        };
+
+        async function buttonFunc() {
+            name = document.getElementById("general_input").value;
+            document.getElementById("general_p").textContent = (await loadData(name)).message;
+            console.log((await loadData(name)).message)
+        }
+    </script>
+</body>
+</html>
